@@ -1,13 +1,16 @@
 import { CloseButton, Dialog, Field, Input, Stack } from "@chakra-ui/react";
 import { memo, type FC } from "react";
 
+import type { User } from "../../../types/api/user";
+
 type Props = {
+  user: User | null;
   open: boolean;
   onClose: () => void;
 };
 
 export const UserDetailModal: FC<Props> = memo((props) => {
-  const { open, onClose } = props;
+  const { user, open, onClose } = props;
   return (
     <Dialog.Root
       open={open}
@@ -25,19 +28,19 @@ export const UserDetailModal: FC<Props> = memo((props) => {
             <Stack spaceY={4}>
               <Field.Root>
                 <Field.Label>名前</Field.Label>
-                <Input value="Taro" readOnly />
+                <Input value={user?.username} readOnly />
               </Field.Root>
               <Field.Root>
                 <Field.Label>フルネーム</Field.Label>
-                <Input value="Taro Yamada" readOnly />
+                <Input value={user?.name} readOnly />
               </Field.Root>
               <Field.Root>
                 <Field.Label>MAIL</Field.Label>
-                <Input value="abc@sample.com" readOnly />
+                <Input value={user?.email} readOnly />
               </Field.Root>
               <Field.Root>
                 <Field.Label>TEL</Field.Label>
-                <Input value="090-1234-5678" readOnly />
+                <Input value={user?.phone} readOnly />
               </Field.Root>
             </Stack>
           </Dialog.Body>
